@@ -1,0 +1,4 @@
+<span class="loading loading-spinner loading-xs"></span>
+<span class="loading loading-spinner loading-sm"></span>
+<span class="loading loading-spinner loading-md"></span>
+<span class="loading loading-spinner loading-lg"></span>
