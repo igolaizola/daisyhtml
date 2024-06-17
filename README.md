@@ -1,8 +1,8 @@
 # daisyhtml
 
-HTML code snippets from daisyui.com
+HTML code snippets from [daisyUI](https://daisyui.com)
 
-This repository contains a collection of HTML code snippets from daisyui.com components.
+This repository contains a collection of HTML code snippets from daisyUI components.
 
 The code snippets are located in the [html](html) directory.
 
