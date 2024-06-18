@@ -1,0 +1,1 @@
+<a className="link link-success">I'm a simple link</a>

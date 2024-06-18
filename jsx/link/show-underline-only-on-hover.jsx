@@ -1,0 +1,1 @@
+<a className="link link-hover">I'm a simple link</a>

@@ -1,0 +1,1 @@
+<input type="text" placeholder="You can't touch this" className="input input-bordered w-full max-w-xs" disabled />

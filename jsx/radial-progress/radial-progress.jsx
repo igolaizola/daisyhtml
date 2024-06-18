@@ -1,0 +1,1 @@
+<div className="radial-progress" style={{"--value":70}} role="progressbar">70%</div>

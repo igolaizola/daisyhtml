@@ -1,0 +1,1 @@
+<a className="link link-error">I'm a simple link</a>

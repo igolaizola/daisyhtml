@@ -1,0 +1,1 @@
+<input type="checkbox" value="synthwave" className="toggle theme-controller"/>

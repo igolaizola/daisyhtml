@@ -1,0 +1,1 @@
+<button className="btn btn-wide">Wide</button>

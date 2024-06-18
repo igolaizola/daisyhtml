@@ -1,0 +1,1 @@
+<textarea className="textarea textarea-warning" placeholder="Bio"></textarea>

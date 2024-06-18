@@ -1,0 +1,1 @@
+Press <kbd className="kbd kbd-sm">F</kbd> to pay respects.

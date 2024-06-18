@@ -1,0 +1,1 @@
+<span className="badge">Badge</span>

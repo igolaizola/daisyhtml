@@ -1,0 +1,1 @@
+<a className="link link-warning">I'm a simple link</a>

@@ -1,0 +1,1 @@
+<a className="link link-neutral">I'm a simple link</a>

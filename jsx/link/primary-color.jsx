@@ -1,0 +1,1 @@
+<a className="link link-primary">I'm a simple link</a>

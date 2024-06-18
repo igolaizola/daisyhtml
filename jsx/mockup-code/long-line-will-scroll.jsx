@@ -1,0 +1,3 @@
+<div className="mockup-code">
+  <pre data-prefix="~"><code>Magnam dolore beatae necessitatibus nemopsum itaque sit. Et porro quae qui et et dolore ratione.</code></pre>
+</div>

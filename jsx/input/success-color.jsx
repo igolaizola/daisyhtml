@@ -1,0 +1,1 @@
+<input type="text" placeholder="Type here" className="input input-bordered input-success w-full max-w-xs" />

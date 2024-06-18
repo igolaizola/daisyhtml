@@ -1,0 +1,1 @@
+<div className="artboard artboard-horizontal phone-6">1024×320</div>
