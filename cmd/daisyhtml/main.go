@@ -82,7 +82,7 @@ func newGenerateCommand() *ffcli.Command {
 	_ = fs.String("config", "", "config file (optional)")
 
 	var output string
-	fs.StringVar(&output, "output", "html", "output folder")
+	fs.StringVar(&output, "output", "", "output folder")
 
 	return &ffcli.Command{
 		Name:       cmd,

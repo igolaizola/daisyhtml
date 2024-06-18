@@ -40,7 +40,8 @@ func (c *Client) Components(ctx context.Context) ([]string, error) {
 type Snippet struct {
 	Component string `json:"component"`
 	Title     string `json:"title"`
-	Code      string `json:"code"`
+	HTML      string `json:"html"`
+	JSX       string `json:"jsx"`
 }
 
 func (b *Browser) Snippets(parent context.Context, component string) ([]Snippet, error) {
@@ -85,7 +86,7 @@ func (b *Browser) Snippets(parent context.Context, component string) ([]Snippet,
 	if err := chromedp.Run(ctx,
 		chromedp.WaitReady("code.language-html", chromedp.ByQuery),
 	); err != nil {
-		return nil, fmt.Errorf("daisy: couldn't wait for code: %w", err)
+		return nil, fmt.Errorf("daisy: couldn't wait for HTML code: %w", err)
 	}
 
 	// Obtain the document
@@ -113,8 +114,49 @@ func (b *Browser) Snippets(parent context.Context, component string) ([]Snippet,
 		snippets = append(snippets, Snippet{
 			Component: component,
 			Title:     text,
-			Code:      code,
+			HTML:      code,
 		})
 	})
+
+	// Click on all JSX buttons
+	if err := chromedp.Run(ctx,
+		chromedp.Evaluate(`Array.from(document.querySelectorAll('button')).filter(btn => btn.innerText === 'JSX').map(btn => btn.click());`, nil),
+	); err != nil {
+		return nil, fmt.Errorf("daisy: couldn't click on JSX buttons: %w", err)
+	}
+
+	// Wait for code to be ready
+	if err := chromedp.Run(ctx,
+		chromedp.WaitReady("code.language-svelte", chromedp.ByQuery),
+	); err != nil {
+		return nil, fmt.Errorf("daisy: couldn't wait for JSX code: %w", err)
+	}
+
+	// Obtain the document
+	if err := chromedp.Run(ctx,
+		chromedp.OuterHTML("html", &html),
+	); err != nil {
+		return nil, fmt.Errorf("daisy: couldn't get html: %w", err)
+	}
+
+	// Parse the document
+	doc, err = goquery.NewDocumentFromReader(strings.NewReader(html))
+	if err != nil {
+		return nil, fmt.Errorf("daisy: couldn't parse components: %w", err)
+	}
+
+	// Extract snippets
+	doc.Find(".component-preview").Each(func(i int, s *goquery.Selection) {
+		text := s.Find(".component-preview-title").Text()
+		code := s.Find("code.language-svelte").Text()
+		if text == "" || code == "" {
+			return
+		}
+		if snippets[i].Title != text {
+			panic("daisy: JSX and HTML snippets are out of sync, this should never happen")
+		}
+		snippets[i].JSX = code
+	})
+
 	return snippets, nil
 }

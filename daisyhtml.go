@@ -54,8 +54,12 @@ func Generate(ctx context.Context, output string) error {
 		}
 
 		// Create snippets folder
-		folder := filepath.Join(output, component)
-		if err := os.MkdirAll(folder, 0755); err != nil {
+		htmlFolder := filepath.Join(output, "html", component)
+		jsxFolder := filepath.Join(output, "jsx", component)
+		if err := os.MkdirAll(htmlFolder, 0755); err != nil {
+			return err
+		}
+		if err := os.MkdirAll(jsxFolder, 0755); err != nil {
 			return err
 		}
 
@@ -64,8 +68,12 @@ func Generate(ctx context.Context, output string) error {
 			name := strings.ToLower(snippet.Title)
 			name = strings.ReplaceAll(name, " ", "-")
 			name = strings.ReplaceAll(name, "/", "-")
-			path := filepath.Join(folder, fmt.Sprintf("%s.html", name))
-			if err := os.WriteFile(path, []byte(snippet.Code), 0644); err != nil {
+			htmlPath := filepath.Join(htmlFolder, fmt.Sprintf("%s.html", name))
+			if err := os.WriteFile(htmlPath, []byte(snippet.HTML), 0644); err != nil {
+				return err
+			}
+			jsxPath := filepath.Join(jsxFolder, fmt.Sprintf("%s.jsx", name))
+			if err := os.WriteFile(jsxPath, []byte(snippet.JSX), 0644); err != nil {
 				return err
 			}
 		}
